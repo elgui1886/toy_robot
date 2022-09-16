@@ -11,8 +11,6 @@ import { RobotState } from '../models/models';
 })
 export class ToyRobotStateService {
   private readonly _state$: BehaviorSubject<RobotState> = new BehaviorSubject({
-    column: 0,
-    row: 0,
   } as RobotState);
 
   /**

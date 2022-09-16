@@ -23,21 +23,35 @@
         <mat-label>Orientation</mat-label>
         <mat-select formControlName="orientation">
             <ng-container *ngFor="let orientation of _orientations">
-                <mat-option value="orientation">{{orientation}}</mat-option>
+                <mat-option [value]="orientation">{{orientation}}</mat-option>
             </ng-container>
         </mat-select>
     </mat-form-field>
-    <button mat-button [disabled]="!_placeForm.valid" style="background-color: orange;
+    <button (click)="dispatchCommand('PLACE')" mat-button [disabled]="!_placeForm.valid" style="background-color: orange;
     height: fit-content;
     margin: auto;" color="primary">Place</button>
 </form>
 <div style="display: flex; flex-direction: row; justify-content: space-between;padding: 24px">
-    <button  [disabled]="_canMove$ | async" mat-button style="background-color: lightblue" color="primary">
+    <button [disabled]="_canMove$ | async" mat-button style="background-color: lightblue" color="primary">
         <span [matTooltip]="_disabledReason">Move</span></button>
-    <button [disabled]="_canMove$ | async" mat-button style="background-color: orange" color="primary">
+    <button (click)="dispatchCommand('LEFT')" [disabled]="_canMove$ | async" mat-button style="background-color: orange"
+        color="primary">
         <span [matTooltip]="_disabledReason">Left</span></button>
     <button [disabled]="_canMove$ | async" mat-button style="background-color: lightcoral" color="primary">
-        <span [matTooltip]="_disabledReason">Right</span></button>
-    <button [disabled]="_canMove$ | async" mat-button style="background-color: lightcyan" color="primary">
+        <span (click)="dispatchCommand('RIGHT')" [matTooltip]="_disabledReason">Right</span></button>
+    <button (click)="dispatchCommand('REPORT')" [disabled]="_canMove$ | async" mat-button
+        style="background-color: lightcyan" color="primary">
         <span [matTooltip]="_disabledReason" matTooltip="_disabledReason">Report</span></button>
 </div>
+
+<ng-template #reportTemplate let-state>
+    <div class="rules" (click)="dismiss()">
+        <!-- <h1 class="rules--title">Ciao da Toy Robot</h1> -->
+        <h1 class="rules--title">Hey! That's my position:</h1>
+        <div style="display: flex; flex-direction: row; justify-content: center;">
+            <h2 class="rule">X: {{state.column}}</h2>
+            <h2 class="rule">Y: {{state.row}}</h2>
+            <h2 class="rule">Orientation: {{state.orientation}}</h2>
+        </div>
+    </div>
+</ng-template>

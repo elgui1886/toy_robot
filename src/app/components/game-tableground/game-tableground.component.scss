@@ -7,6 +7,7 @@
   .tableground--column {
     display: flex; 
     flex:1; 
+    flex-direction: column;
     background-color: azure; 
     border-style: solid;  
     align-items: center;

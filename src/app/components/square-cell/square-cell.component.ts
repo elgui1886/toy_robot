@@ -20,14 +20,14 @@ export class SquareCellComponent implements OnInit {
    * Specified if cell is actually selected
    */
   @Input()
-  isSelected: boolean;
+  isSelected: boolean | null;
 
   /**
    * Robot orientation inside the cell
    */
   _cssOrientation: string = 'orientation--nord';
   @Input()
-  set orientation(value: Orientation) {
+  set orientation(value: Orientation | null) {
     if (value) this._cssOrientation = `orientation--${value.toLowerCase()}`;
   }
 

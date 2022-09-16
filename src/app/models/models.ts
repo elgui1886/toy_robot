@@ -1,5 +1,5 @@
 
-export type Commands = 'PLACE' | 'MOVE' | 'LEFT' |'RIGHT'
+export type Commands = 'PLACE' | 'MOVE' | 'LEFT' |'RIGHT' |'REPORT'
 export enum Orientation {
     NORTH = 'NORTH',
     WEST = 'WEST',
