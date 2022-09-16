@@ -1,0 +1,11 @@
+.form-group {
+  display: flex;
+  flex-direction: row;
+}
+.form-field {
+  padding: 8px;
+  width: 27%;
+  .mat-form-field-infix {
+    width: auto !important;
+  }
+}

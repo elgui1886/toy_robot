@@ -1,0 +1,15 @@
+.tableground {
+    flex: 1;
+  }
+  .tableground--row {
+    display: flex; flex-direction: row; height: 20%;
+  }
+  .tableground--column {
+    display: flex; 
+    flex:1; 
+    background-color: azure; 
+    border-style: solid;  
+    align-items: center;
+    justify-content: center;
+  }
+  

@@ -1,0 +1,9 @@
+<div class="tableground">
+    <ng-container *ngFor="let row of table.row; let i = index">
+        <div class="tableground--row">
+            <ng-container *ngFor="let col of table.column; let j = index">
+                <square-cell class="tableground--column" [isSelected]="true"></square-cell>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
