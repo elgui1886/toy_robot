@@ -1,3 +1,4 @@
+import { Config } from './../../constants/constants';
 import { GameCommandService } from './../../services/command.service';
 import { RobotState } from './../../models/models';
 import { ToyRobotStateService } from './../../services/toyrobot.state.service';
@@ -15,11 +16,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { columnNumber, rowNumber } from 'src/app/constants/constants';
 import { Commands, Orientation } from 'src/app/models/models';
 import { map, Observable, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'game-console',
@@ -137,10 +136,10 @@ export class GameConsoleComponent implements OnInit {
       orientation: AbstractControl;
     }>({
       xposition: fb.control(null, {
-        validators: [Validators.max(columnNumber - 1), Validators.required],
+        validators: [Validators.max(Config.columnNumber - 1), Validators.required],
       }),
       yposition: fb.control(null, {
-        validators: [Validators.max(rowNumber - 1), Validators.required],
+        validators: [Validators.max(Config.rowNumber - 1), Validators.required],
       }),
       orientation: fb.control(null, {
         validators: Validators.required,

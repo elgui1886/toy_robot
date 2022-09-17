@@ -1,8 +1,8 @@
 <div class="tableground">
-    <ng-container *ngFor="let row of table.row; let i = index">
-        <div class="tableground--row">
-            <ng-container *ngFor="let col of table.column; let j = index">
-                <square-cell class="tableground--column" [orientation]="orientation$ | async" [isSelected]="_isRobotInSquare$(i,j) | async"></square-cell>
+    <ng-container *ngFor="let row of table.row; let i = index; let even = even">
+        <div [style.height]="_rowheight" class="tableground--row">
+            <ng-container *ngFor="let col of table.column; let j = index; let odd = odd">
+                <square-cell [backGroundColor]="!odd && even || odd && !even  ? 'main' : 'altern'" class="tableground--column" [orientation]="_orientation$ | async" [isSelected]="_isRobotInSquare$(i,j) | async"></square-cell>
             </ng-container>
         </div>
     </ng-container>

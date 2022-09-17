@@ -1,8 +1,8 @@
+import { Config } from './../constants/constants';
 import { Orientation, RobotState } from './../models/models';
 import { ToyRobotStateService } from './toyrobot.state.service';
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { columnNumber, rowNumber } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -75,14 +75,14 @@ export class GameCommandService {
     if (currentState) {
       switch (currentState.orientation) {
         case Orientation.NORTH:
-          currentState.row === rowNumber - 1
+          currentState.row === Config.rowNumber - 1
             ? this._openErrorSnackbar(errorTemplate)
             : this._toyStateService.next(
                 (nextstate) => (nextstate.row = currentState.row + 1)
               );
           break;
         case Orientation.WEST:
-          currentState.column === columnNumber - 1
+          currentState.column === Config.columnNumber - 1
             ? this._openErrorSnackbar(errorTemplate)
             : this._toyStateService.next(
                 (nextstate) => (nextstate.column = currentState.column + 1)

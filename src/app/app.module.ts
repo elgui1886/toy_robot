@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, Provider } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -12,6 +12,22 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { GameConsoleComponent } from './components/game-console/game-console.component';
 import { GameTablegroundComponent } from './components/game-tableground/game-tableground.component';
+import { GameConfigurationService } from './services/game.configuration.service'
+
+
+const appConfigInitializer = (appConfig: GameConfigurationService) => {
+  return () => {
+    const appconfigpath = 'config.json';
+    return appConfig.loadConfig(appconfigpath);
+  };
+};
+
+export const APP_CONFIG_INITIALIZER: Provider = {
+  provide: APP_INITIALIZER,
+  useFactory: appConfigInitializer,
+  multi: true,
+  deps: [GameConfigurationService],
+};
 
 @NgModule({
   declarations: [
@@ -31,7 +47,7 @@ import { GameTablegroundComponent } from './components/game-tableground/game-tab
     MatTooltipModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [APP_CONFIG_INITIALIZER],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

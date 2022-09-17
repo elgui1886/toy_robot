@@ -1,10 +1,9 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  ElementRef,
   HostBinding,
   Input,
   OnInit,
-  ViewChild,
 } from '@angular/core';
 import { Orientation } from 'src/app/models/models';
 
@@ -12,9 +11,9 @@ import { Orientation } from 'src/app/models/models';
   selector: 'square-cell',
   templateUrl: './square-cell.component.html',
   styleUrls: ['./square-cell.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SquareCellComponent implements OnInit {
-  @HostBinding('class.square')
 
   /**
    * Specified if cell is actually selected
@@ -34,8 +33,12 @@ export class SquareCellComponent implements OnInit {
   /**
    * Cell's background color
    */
+  @HostBinding('style.background-color')
+  _backGroundColor: string;
   @Input()
-  backGroundColor: 'pink' | 'blue' = 'blue';
+  set backGroundColor(value: 'main' | 'altern') {
+    this._backGroundColor = value === 'main' ?  'rgb(255, 157, 149)' : 'rgb(128, 181, 255)'
+  }
 
   constructor() {}
 
