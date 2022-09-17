@@ -1,3 +1,4 @@
+import { GameCommandService } from './../../services/command.service';
 import { RobotState } from './../../models/models';
 import { ToyRobotStateService } from './../../services/toyrobot.state.service';
 import {
@@ -18,6 +19,7 @@ import { columnNumber, rowNumber } from 'src/app/constants/constants';
 import { Commands, Orientation } from 'src/app/models/models';
 import { map, Observable, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'game-console',
@@ -59,15 +61,19 @@ export class GameConsoleComponent implements OnInit {
   @ViewChild('reportTemplate')
   _reportTemplate: TemplateRef<any>;
 
+  @ViewChild('errorTemplate')
+  _errorTemplate: TemplateRef<any>;
+
   constructor(
     _fb: FormBuilder,
     private _toyStateService: ToyRobotStateService,
+    private _commandDispatcherService: GameCommandService,
     private _snackBar: MatSnackBar
   ) {
     this._placeForm = this._initPlaceForm(_fb);
 
     this._canMove$ = this._toyStateService
-      .select((state) => state.orientation)
+      .select((state) => state && state.orientation)
       .pipe(
         map((val) => !!!val),
         tap((val) =>
@@ -84,21 +90,30 @@ export class GameConsoleComponent implements OnInit {
    * Update toy robot state (fully or parzially)
    */
   dispatchCommand(command: Commands) {
-    // Preventing not to shown incorrect information
+    // Preventing to show incorrect information
     this.dismiss();
-      
     switch (command) {
       case 'PLACE':
-        this._handlePLACECommand();
+        const nextstate: RobotState = {
+          column: this._placeForm.controls.xposition.value,
+          row: this._placeForm.controls.yposition.value,
+          orientation: this._placeForm.controls.orientation.value,
+        };
+        this._commandDispatcherService.handlePLACECommand(nextstate);
         break;
       case 'LEFT':
-        this._handleLEFTCommand();
+        this._commandDispatcherService.handleLEFTCommand();
         break;
       case 'RIGHT':
-        this._handleRIGHTCommand();
+        this._commandDispatcherService.handleRIGHTCommand();
         break;
       case 'REPORT':
-        this._handleREPORTCommand();
+        this._commandDispatcherService.handleREPORTCommand(
+          this._reportTemplate
+        );
+        break;
+      case 'MOVE':
+        this._commandDispatcherService.handleMOVECommand(this._errorTemplate);
         break;
     }
   }
@@ -132,71 +147,5 @@ export class GameConsoleComponent implements OnInit {
       }),
     });
     return form;
-  }
-
-  /**
-   * Handler for PLACE command execution
-   */
-  private _handlePLACECommand() {
-    if (this._placeForm.valid) {
-      const state: RobotState = {
-        column: this._placeForm.controls.xposition.value,
-        row: this._placeForm.controls.yposition.value,
-        orientation: this._placeForm.controls.orientation.value,
-      };
-      this._toyStateService.next(state);
-    }
-  }
-
-  /**
-   * Handler for LEFT command execution
-   */
-  private _handleLEFTCommand() {
-    const state = this._toyStateService.snapshot;
-    //If there is an orientation the robot is in the tableground
-    if (state && state.orientation) {
-      const currentIndex = this._orientations.indexOf(
-        state.orientation.toString()
-      );
-      const nextIndex =
-        currentIndex === 0 ? this._orientations.length - 1 : currentIndex - 1;
-      const nextOrientation =
-        Orientation[this._orientations[nextIndex] as keyof typeof Orientation];
-      this._toyStateService.next(
-        (state) => (state.orientation = nextOrientation)
-      );
-    }
-  }
-
-  /**
-   * Handler for RIGHT command execution
-   */
-  private _handleRIGHTCommand() {
-    const state = this._toyStateService.snapshot;
-    //If there is an orientation the robot is in the tableground
-    if (state && state.orientation) {
-      const currentIndex = this._orientations.indexOf(
-        state.orientation.toString()
-      );
-      const nextIndex =
-        currentIndex === this._orientations.length - 1 ? 0 : currentIndex + 1;
-      const nextOrientation =
-        Orientation[this._orientations[nextIndex] as keyof typeof Orientation];
-      this._toyStateService.next(
-        (state) => (state.orientation = nextOrientation)
-      );
-    }
-  }
-
-  /**
-   * Handler for RIGHT command execution
-   */
-  private _handleREPORTCommand() {
-    this._snackBar.dismiss();
-    const currentState = this._toyStateService.snapshot;
-    this._snackBar.openFromTemplate(this._reportTemplate, {
-      data: currentState,
-      duration: 5000
-    });
   }
 }
