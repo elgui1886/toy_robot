@@ -1,0 +1,34 @@
+{
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "[scss]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "[html]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "workbench.colorCustomizations": {
+        "statusBar.background": "#547094",
+        "statusBar.foreground": "#ebeef2",
+        "statusBarItem.remoteBackground": "#547094",
+        "statusBarItem.remoteForeground": "#ebeef2",
+        "badge.background": "#547094",
+        "badge.foreground": "#ebeef2",
+        "activityBar.background": "#547094",
+        "activityBar.foreground": "#ebeef2",
+        "activityBar.activeBackground": "#547094",
+        "activityBarBadge.background": "#547094",
+        "activityBarBadge.foreground": "#ebeef2",
+        "activityBar.activeBorder": "#547094",
+        "window.activeBorder": "#547094",
+        "window.inactiveBorder": "#547094",
+        "titleBar.activeBackground": "#547094",
+        "titleBar.activeForeground": "#ebeef2",
+        "titleBar.inactiveForeground": "#ebeef2"
+      },
+      "window.title": "Toy-robot"
+}
