@@ -59,10 +59,7 @@ export class GameCommandService {
    */
   handleREPORTCommand() {
     this._checkCommandValidity();
-    const currentState = this._toyStateService.snapshot;
-    return currentState.orientation && currentState.column && currentState.row
-      ? currentState
-      : null;
+    return this._toyStateService.snapshot;
   }
   /**
    * Handler for MOVE command execution
@@ -98,14 +95,22 @@ export class GameCommandService {
   }
 
   private _baseMoveCommand(direction: 'row' | 'column', operation: '+' | '-') {
-    const execution = new Function('state', `(state.${direction} = state.${direction} ${operation} 1)`);
+    const execution = new Function(
+      'state',
+      `(state.${direction} = state.${direction} ${operation} 1)`
+    );
     this._toyStateService.next(execution as any);
   }
   private _checkCommandValidity() {
     const currentstate = this._toyStateService.snapshot;
-    const canExecute = !!(currentstate && !isEoNoU(currentstate.column?.toString()) && !isEoNoU(currentstate.row?.toString()) && !isEoNoU(currentstate.orientation?.toString()));
-    if(!canExecute) {
-      throw new Error('Cannot execute requested command')
+    const canExecute = !!(
+      currentstate &&
+      !isEoNoU(currentstate.column?.toString()) &&
+      !isEoNoU(currentstate.row?.toString()) &&
+      !isEoNoU(currentstate.orientation?.toString())
+    );
+    if (!canExecute) {
+      throw new Error('Cannot execute requested command');
     }
   }
 }
