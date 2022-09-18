@@ -110,4 +110,40 @@ describe('Command Service', () => {
     });
     expect(commandService.handleMOVECommand()).toBeFalse();
   });
+
+  it('should be execute: LEFT Command', () => {
+    // Move ok
+    stateService.next((testState) => {
+      (testState.orientation = Orientation.NORTH);
+    });
+    commandService.handleLEFTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.EAST);
+
+    commandService.handleLEFTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.SOUTH);
+
+    commandService.handleLEFTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.WEST);
+
+    commandService.handleLEFTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.NORTH);
+  });
+
+  it('should be execute: RIGHT Command', () => {
+    // Move ok
+    stateService.next((testState) => {
+      (testState.orientation = Orientation.NORTH);
+    });
+    commandService.handleRIGHTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.WEST);
+
+    commandService.handleRIGHTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.SOUTH);
+
+    commandService.handleRIGHTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.EAST);
+
+    commandService.handleRIGHTCommand()
+    expect(stateService.snapshot.orientation).toBe(Orientation.NORTH);
+  });
 });
