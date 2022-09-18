@@ -1,4 +1,4 @@
-import { Config, maxRowNumber, maxColumnNumber } from './../constants/constants';
+import { Config, maxRowNumber, maxColumnNumber } from '../../constants/constants';
 import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',

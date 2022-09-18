@@ -1,8 +1,10 @@
 .tableground {
     flex: 1;
+    border: 1px solid black; 
   }
   .tableground--row {
-    display: flex; flex-direction: row
+    display: flex; 
+    flex-direction: row
   }
   .tableground--column {
     display: flex; 

@@ -11,26 +11,25 @@
 }
 
 
-.rules {
+.snackbar {
     display: flex;
     flex-direction: column;
     padding: 1px;
     flex: 1 1 auto;
     align-self: center;
   }
-  .rules--title {
+  .snackbar--title {
     align-self: center;
     font-weight: 200;
     color: rgb(255, 175, 62);
     font-size: 48px;
   }
-  .rules--subtitle {
-    box-sizing: border-box;
-    color: rgb(255, 157, 149);
-    font-weight: 400;
-    align-self: center;
+  .snackbar--container {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center;
   }
-  .rule {
+  .snackbar--info {
     padding-right: 8px;
     font-weight: 200;
   }

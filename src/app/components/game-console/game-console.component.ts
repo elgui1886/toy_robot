@@ -1,7 +1,7 @@
+import { GameCommandService } from './../../services/command/command.service';
 import { Config } from './../../constants/constants';
-import { GameCommandService } from './../../services/command.service';
 import { RobotState } from './../../models/models';
-import { ToyRobotStateService } from './../../services/toyrobot.state.service';
+import { ToyRobotStateService } from '../../services/state/toyrobot.state.service';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -77,7 +77,7 @@ export class GameConsoleComponent implements OnInit {
         map((val) => !!!val),
         tap((val) =>
           val
-            ? (this._disabledReason = 'Posiziona prima il robot')
+            ? (this._disabledReason = 'First PLACE the robot')
             : (this._disabledReason = '')
         )
       );
@@ -107,12 +107,22 @@ export class GameConsoleComponent implements OnInit {
         this._commandDispatcherService.handleRIGHTCommand();
         break;
       case 'REPORT':
-        this._commandDispatcherService.handleREPORTCommand(
-          this._reportTemplate
-        );
+        const state = this._commandDispatcherService.handleREPORTCommand();
+        this._snackBar.openFromTemplate(this._reportTemplate, {
+          data: state,
+          duration: 5000,
+        });
+
         break;
       case 'MOVE':
-        this._commandDispatcherService.handleMOVECommand(this._errorTemplate);
+        const canHandleMove =
+          this._commandDispatcherService.handleMOVECommand();
+        if (!canHandleMove) {
+          this._openErrorSnackbar(
+            this._errorTemplate,
+            "Can't MOVE! I'll fall down"
+          );
+        }
         break;
     }
   }
@@ -136,15 +146,35 @@ export class GameConsoleComponent implements OnInit {
       orientation: AbstractControl;
     }>({
       xposition: fb.control(null, {
-        validators: [Validators.max(Config.columnNumber - 1), Validators.required],
+        validators: [
+          Validators.max(Config.columnNumber - 1),
+          Validators.required,
+          Validators.min(0),
+        ],
       }),
       yposition: fb.control(null, {
-        validators: [Validators.max(Config.rowNumber - 1), Validators.required],
+        validators: [
+          Validators.max(Config.rowNumber - 1),
+          Validators.required,
+          Validators.min(0),
+        ],
       }),
       orientation: fb.control(null, {
         validators: Validators.required,
       }),
     });
     return form;
+  }
+
+  /**
+   * Utility for shown error snackbar based on custom template
+   * @param errorTemplate template to be shown on error
+   */
+  private _openErrorSnackbar(errorTemplate: TemplateRef<any>, message: string) {
+    this._snackBar.openFromTemplate(errorTemplate, {
+      panelClass: ['error-snackbar'],
+      duration: 5000,
+      data: message,
+    });
   }
 }

@@ -6,7 +6,10 @@
             X position <strong>required</strong>
         </mat-error>
         <mat-error *ngIf="_placeForm.get('xposition')?.hasError('max')">
-            Why <strong>kill</strong> toy robot? You can't move more than max table length
+            You can't move more than max table length
+        </mat-error>
+        <mat-error *ngIf="_placeForm.get('xposition')?.hasError('min')">
+            You must provide positive x position
         </mat-error>
     </mat-form-field>
     <mat-form-field class="form-field" appearance="fill">
@@ -16,7 +19,10 @@
             Y position <strong>required</strong>
         </mat-error>
         <mat-error *ngIf="_placeForm.get('yposition')?.hasError('max')">
-            Why <strong>kill</strong> toy robot? You can't move more than max table length
+            You can't move more than max table length
+        </mat-error>
+        <mat-error *ngIf="_placeForm.get('yposition')?.hasError('min')">
+            You must provide positive x position
         </mat-error>
     </mat-form-field>
     <mat-form-field class="form-field" appearance="fill">
@@ -47,17 +53,17 @@
 </div>
 
 <ng-template #reportTemplate let-state>
-    <div class="rules" (click)="dismiss()">
+    <div class="snackbar" (click)="dismiss()">
         <!-- <h1 class="rules--title">Ciao da Toy Robot</h1> -->
-        <h1 class="rules--title">Hey! That's my position:</h1>
-        <div style="display: flex; flex-direction: row; justify-content: center;">
-            <h2 class="rule">X: {{state.column}}</h2>
-            <h2 class="rule">Y: {{state.row}}</h2>
-            <h2 class="rule">Orientation: {{state.orientation}}</h2>
+        <h1 class="snackbar--title">Hey! That's my position:</h1>
+        <div class="snackbar--container">
+            <h2 class="snackbar--info">X: {{state.column}}</h2>
+            <h2 class="snackbar--info">Y: {{state.row}}</h2>
+            <h2 class="snackbar--info">Orientation: {{state.orientation}}</h2>
         </div>
     </div>
 </ng-template>
 
-<ng-template #errorTemplate>
-    <h1 (click)="dismiss()" style="padding: 6% 0 0% 6%;" class="rules--title">Can't MOVE! I'll fall down</h1>
+<ng-template #errorTemplate let-message>
+    <h1 (click)="dismiss()" style="padding: 6% 0 0% 6%;" class="rules--title">{{message}}</h1>
 </ng-template>

@@ -12,7 +12,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { GameConsoleComponent } from './components/game-console/game-console.component';
 import { GameTablegroundComponent } from './components/game-tableground/game-tableground.component';
-import { GameConfigurationService } from './services/game.configuration.service'
+import { GameConfigurationService } from './services/config/game.configuration.service'
 
 
 const appConfigInitializer = (appConfig: GameConfigurationService) => {

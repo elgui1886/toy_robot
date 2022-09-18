@@ -4,7 +4,7 @@ import {
   map,
   Observable,
 } from 'rxjs';
-import { RobotState } from '../models/models';
+import { RobotState } from '../../models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,14 +27,6 @@ export class ToyRobotStateService {
    */
   select<K>(mapFn: (state: RobotState) => K): Observable<K> {
     return this._state$.pipe(map(mapFn));
-  }
-
-  /**
-   * Current state observable
-   * @returns RobotState as observable value
-   */
-  get() {
-    return this._state$.asObservable();
   }
 
   /**

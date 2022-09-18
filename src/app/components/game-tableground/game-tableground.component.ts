@@ -1,6 +1,6 @@
 import { Config } from './../../constants/constants';
 import { map, Observable, of } from 'rxjs';
-import { ToyRobotStateService } from './../../services/toyrobot.state.service';
+import { ToyRobotStateService } from '../../services/state/toyrobot.state.service';
 import {
   Component,
   OnInit,
@@ -28,7 +28,7 @@ export class GameTablegroundComponent implements OnInit {
 
   constructor(private _toyStateService: ToyRobotStateService) {
     this._isRobotInSquare$ = (row: number, column: number) => {
-      return this._toyStateService.get().pipe(
+      return this._toyStateService.select(state => state).pipe(
         map((state) => {
           const rowstate = state.row;
           const columnstate = state.column;
