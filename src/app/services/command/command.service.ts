@@ -21,37 +21,14 @@ export class GameCommandService {
    * Handler for LEFT command execution
    */
   handleLEFTCommand() {
-    this._checkCommandValidity();
-    const currentState = this._toyStateService.snapshot;
-    const currentIndex = this._orientations.indexOf(
-      (currentState.orientation as any).toString()
-    );
-    const nextIndex =
-      currentIndex === 0 ? this._orientations.length - 1 : currentIndex - 1;
-    const nextOrientation =
-      Orientation[this._orientations[nextIndex] as keyof typeof Orientation];
-    this._toyStateService.next(
-      (state) => (state.orientation = nextOrientation)
-    );
+    this._baseRotateCommand('LEFT');
   }
 
   /**
    * Handler for RIGHT command execution
    */
   handleRIGHTCommand() {
-    this._checkCommandValidity();
-    const currentState = this._toyStateService.snapshot;
-    //If there is an orientation the robot is in the tableground
-    const currentIndex = this._orientations.indexOf(
-      (currentState.orientation as any).toString()
-    );
-    const nextIndex =
-      currentIndex === this._orientations.length - 1 ? 0 : currentIndex + 1;
-    const nextOrientation =
-      Orientation[this._orientations[nextIndex] as keyof typeof Orientation];
-    this._toyStateService.next(
-      (nextstate) => (nextstate.orientation = nextOrientation)
-    );
+    this._baseRotateCommand('RIGHT');
   }
 
   /**
@@ -94,6 +71,11 @@ export class GameCommandService {
     return canHandle;
   }
 
+  /**
+   * Base core function to move robot
+   * @param direction direction where to move
+   * @param operation increment or decrement position in specific direction
+   */
   private _baseMoveCommand(direction: 'row' | 'column', operation: '+' | '-') {
     const execution = new Function(
       'state',
@@ -101,6 +83,32 @@ export class GameCommandService {
     );
     this._toyStateService.next(execution as any);
   }
+
+  /**
+   * Base core function to rotate robot
+   * @param rotate specified the rotation (LEFT | RIGHT)
+   */
+  private _baseRotateCommand(rotate: 'LEFT' | 'RIGHT') {
+    this._checkCommandValidity();
+    const currentState = this._toyStateService.snapshot;
+    const currentIndex = this._orientations.indexOf(currentState.orientation);
+    let nextIndex: number;
+    if (rotate === 'RIGHT') {
+      nextIndex =
+        currentIndex === this._orientations.length - 1 ? 0 : currentIndex + 1;
+    } else {
+      nextIndex =
+        currentIndex === 0 ? this._orientations.length - 1 : currentIndex - 1;
+    }
+    const nextOrientation = this._orientations[nextIndex];
+    this._toyStateService.next(
+      (nextstate) => (nextstate.orientation = nextOrientation)
+    );
+  }
+
+  /**
+   * State guard to ensure that robot is in tabletop
+   */
   private _checkCommandValidity() {
     const currentstate = this._toyStateService.snapshot;
     const canExecute = !!(

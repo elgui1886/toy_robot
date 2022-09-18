@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  map,
-  Observable,
-} from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { RobotState } from '../../models/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToyRobotStateService {
-  private readonly _state$: BehaviorSubject<RobotState> = new BehaviorSubject({
-  } as RobotState);
+  private readonly _state$: BehaviorSubject<RobotState> = new BehaviorSubject(
+    {} as RobotState
+  );
 
   /**
    * Returns the current state
@@ -22,7 +19,7 @@ export class ToyRobotStateService {
 
   /**
    * Select state: mapped object from RobotState
-   * @param mapFn funcition that maps from RobotState to a mapped obj from it
+   * @param mapFn funcition that maps from RobotState to a mapped object from it
    * @returns An observable mapped object from RobotState
    */
   select<K>(mapFn: (state: RobotState) => K): Observable<K> {

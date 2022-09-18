@@ -30,7 +30,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class GameConsoleComponent implements OnInit {
   //#region Templates fields
   /**
-   * From for PLACE command
+   * Typed from for PLACE command
    */
   _placeForm: FormGroup<{
     xposition: AbstractControl;
@@ -57,11 +57,19 @@ export class GameConsoleComponent implements OnInit {
   _canMove$: Observable<boolean>;
   //#endregion
 
+  //#region Query fields
+  /**
+   * Template for user info snackbar messages
+   */
   @ViewChild('reportTemplate')
   _reportTemplate: TemplateRef<any>;
 
+  /**
+   * Template for user error snackbar messages
+   */
   @ViewChild('errorTemplate')
   _errorTemplate: TemplateRef<any>;
+  //#endregion
 
   constructor(
     _fb: FormBuilder,
@@ -83,7 +91,7 @@ export class GameConsoleComponent implements OnInit {
       );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   /**
    * Update toy robot state (fully or parzially)
@@ -112,7 +120,6 @@ export class GameConsoleComponent implements OnInit {
           data: state,
           duration: 5000,
         });
-
         break;
       case 'MOVE':
         const canHandleMove =

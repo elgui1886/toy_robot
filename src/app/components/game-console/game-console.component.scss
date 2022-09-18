@@ -2,34 +2,51 @@
   display: flex;
   flex-direction: row;
 }
+
 .form-field {
   padding: 8px;
   width: 27%;
+
   .mat-form-field-infix {
     width: auto !important;
   }
 }
 
+.commands {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.place {
+  background-color: orange;
+  height: fit-content;
+  margin: auto
+}
 
 .snackbar {
-    display: flex;
-    flex-direction: column;
-    padding: 1px;
-    flex: 1 1 auto;
-    align-self: center;
-  }
-  .snackbar--title {
-    align-self: center;
-    font-weight: 200;
-    color: rgb(255, 175, 62);
-    font-size: 48px;
-  }
-  .snackbar--container {
-    display: flex; 
-    flex-direction: row; 
-    justify-content: center;
-  }
-  .snackbar--info {
-    padding-right: 8px;
-    font-weight: 200;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+  flex: 1 1 auto;
+  align-self: center;
+}
+
+.snackbar--title {
+  align-self: center;
+  font-weight: 200;
+  color: rgb(255, 175, 62);
+  font-size: 48px;
+}
+
+.snackbar--container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.snackbar--info {
+  padding-right: 8px;
+  font-weight: 200;
+}

@@ -1,30 +1,30 @@
 <div class="home">
-    <div class="left-section">
-        <div class="rules">
-            <h1 class="rules--title">Toy Robot Simulator</h1>
-            <h2 class="rules--subtitle">How to operate the robot</h2>
-            <div class="rule">
-                <span class="rule--title">PLACE X,Y,F</span> - will put the toy robot on the table in position X,Y and
-                facing NORTH, SOUTH, EAST or WEST.
-            </div>
-            <div class="rule">
-                <span class="rule--title">MOVE</span> - will move the toy robot one unit forward in the direction it is
-                currently facing.
-            </div>
-            <div class="rule">
-                <span class="rule--title">LEFT |RIGHT</span> - will rotate the robot 90 degrees in the specified
-                direction without changing the position of
-                the
-                robot.
-            </div>
-            <div class="rule">
-                <span class="rule--title">REPORT</span> - will announce the X,Y and F of the robot. This can be in any
-                form, but standard output is
-                sufficient.
-            </div>
-        </div>
-        <game-console class="form"></game-console>
+  <div class="left-section">
+    <!-- Game rules -->
+    <div class="rules">
+      <h1 class="rules--title">Toy Robot Simulator</h1>
+      <h2 class="rules--subtitle">How to operate the robot</h2>
+      <div class="rule">
+        <span class="rule--title">PLACE X,Y,F</span> - will put the toy robot on
+        the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
+      </div>
+      <div class="rule">
+        <span class="rule--title">MOVE</span> - will move the toy robot one unit
+        forward in the direction it is currently facing.
+      </div>
+      <div class="rule">
+        <span class="rule--title">LEFT |RIGHT</span> - will rotate the robot 90
+        degrees in the specified direction without changing the position of the
+        robot.
+      </div>
+      <div class="rule">
+        <span class="rule--title">REPORT</span> - will announce the X,Y and F of
+        the robot. This can be in any form, but standard output is sufficient.
+      </div>
     </div>
-    <!-- Tabella movimenti -->
-    <game-tableground [table]="_table" class="right-section"></game-tableground>
+    <!-- Game console -->
+    <game-console class="form"></game-console>
+  </div>
+  <!-- Tabella movimenti -->
+  <game-tableground [table]="_table" class="right-section"></game-tableground>
 </div>

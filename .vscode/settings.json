@@ -1,15 +1,15 @@
 {
     "[typescript]": {
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.typescript-language-features"
       },
       "[scss]": {
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.css-language-features"
       },
       "[html]": {
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.html-language-features"
       },
       "workbench.colorCustomizations": {
         "statusBar.background": "#547094",
