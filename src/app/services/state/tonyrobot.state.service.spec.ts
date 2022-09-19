@@ -1,12 +1,9 @@
-import { GameConfig } from './../../models/game-config';
+
 import { Config } from './../../constants/constants';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Orientation, RobotState } from './../../models/models';
 import { GameCommandService } from './../command/command.service';
 import { TestBed } from '@angular/core/testing';
 import { ToyRobotStateService } from './toyrobot.state.service';
-import { Overlay } from '@angular/cdk/overlay';
-import { TemplateRef } from '@angular/core';
 import { GameConfigurationService } from '../config/game.configuration.service';
 
 describe('State Service', () => {
