@@ -1,5 +1,5 @@
 
-export type Commands = 'PLACE' | 'MOVE' | 'LEFT' |'RIGHT' |'REPORT'
+export type Commands = 'PLACE' | 'MOVE' | 'LEFT' | 'RIGHT' | 'REPORT'
 export enum Orientation {
     NORTH = 'NORTH',
     WEST = 'WEST',
@@ -15,4 +15,8 @@ export interface RobotState {
 export interface GameTable {
     row: any[];
     column: any[];
+}
+export interface GameConfig {
+    rowNumber: number;
+    columnNumber: number;
 }

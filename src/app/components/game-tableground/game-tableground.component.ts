@@ -21,9 +21,19 @@ export class GameTablegroundComponent implements OnInit {
   table: GameTable;
   //#endregion
   //#region Template fields
+  /**
+   * Observe robot orientation change
+   */
   _orientation$: Observable<Orientation>;
+  /**
+   * Observe if robot is actually in tableground
+   */
   _isRobotInSquare$: (row: number, column: number) => Observable<boolean>;
-  _rowheight = `${100/Config.rowNumber}%`
+
+  /**
+   * Dinamically se table row height based on game configuration
+   */
+  _rowheight = `${100 / Config.rowNumber}%`
   //#endregion
 
   constructor(private _toyStateService: ToyRobotStateService) {
@@ -40,5 +50,5 @@ export class GameTablegroundComponent implements OnInit {
     this._orientation$ = this._toyStateService.select((x) => x.orientation);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

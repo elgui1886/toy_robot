@@ -1,4 +1,4 @@
-import { GameConfig } from './../models/game-config';
+import { GameConfig } from "../models/models";
 
 export const rowNumber = 5;
 export const columnNumber = 5;

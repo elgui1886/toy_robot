@@ -62,15 +62,15 @@
         <!-- <h1 class="rules--title">Ciao da Toy Robot</h1> -->
         <h1 class="snackbar--title">Hey! That's my position:</h1>
         <div class="snackbar--container">
-            <h2 class="snackbar--info">X: {{ state.column }}</h2>
-            <h2 class="snackbar--info">Y: {{ state.row }}</h2>
-            <h2 class="snackbar--info">Orientation: {{ state.orientation }}</h2>
+            <h2 class="snackbar--info">X: {{ state.column }},</h2>
+            <h2 class="snackbar--info">Y: {{ state.row }},</h2>
+            <h2 class="snackbar--info">F: {{ state.orientation }}</h2>
         </div>
     </div>
 </ng-template>
 
 <ng-template #errorTemplate let-message>
-    <h1 (click)="dismiss()" style="padding: 6% 0 0% 6%" class="rules--title">
+    <h1 (click)="dismiss()" style="padding: 6% 0 0% 6%" class="snackbar--title">
         {{ message }}
     </h1>
 </ng-template>

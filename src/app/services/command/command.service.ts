@@ -9,7 +9,7 @@ import { isEoNoU } from 'src/app/constants/functions';
 })
 export class GameCommandService {
   private _orientations = Object.values(Orientation);
-  constructor(private _toyStateService: ToyRobotStateService) {}
+  constructor(private _toyStateService: ToyRobotStateService) { }
   /**
    * Handler for PLACE command execution
    */
@@ -67,7 +67,6 @@ export class GameCommandService {
           : (this._baseMoveCommand('column', '-'), (canHandle = true));
         break;
     }
-
     return canHandle;
   }
 
